@@ -17,18 +17,16 @@ public class Plano {
     private final int ancho;
     private final int alto;
 
-    private double paso = 0.2;
+    private double paso = 0.01;
 
     private int tamanoPunto = 8;
     private int escalado = 20;
-
-    private Funcion f;
 
     public static final int ESCALA_MIN = 5;
     public static final int ESCALA_PASO = 5;
     public static final int ESCALA_MAX = 60;
 
-    private static final int PUNTOS_MAX = 20;
+    private static final int PUNTOS_MAX = 40;
 
     public Plano(JPanel p) {
         panel = p;
@@ -59,7 +57,7 @@ public class Plano {
 
         Graphics2D g = (Graphics2D) panel.getGraphics();
 
-        g.clearRect(0, 0, alto, ancho + 2);
+        g.clearRect(0, 0, alto, ancho);
         dibujarPlano();
 
     }
@@ -121,7 +119,6 @@ public class Plano {
     }
 
     public void setFuncion(Funcion f) {
-        this.f = f;
     }
 
 }
