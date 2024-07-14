@@ -49,6 +49,9 @@ public class Ventana extends javax.swing.JFrame {
                 cambioFuncion();
             }
         });
+        
+        this.f = new FLineal();
+        setEntradas();
 
     }
 
@@ -133,7 +136,7 @@ public class Ventana extends javax.swing.JFrame {
         panelLateral.setMinimumSize(new java.awt.Dimension(312, 510));
 
         cboxFunciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cboxFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Lineal", "Cuadrática" }));
+        cboxFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lineal", "Cuadrática" }));
         cboxFunciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cboxFunciones.setFocusable(false);
         cboxFunciones.setMaximumSize(new java.awt.Dimension(131, 31));
@@ -362,13 +365,13 @@ public class Ventana extends javax.swing.JFrame {
 
             case "Lineal":
 
-                actualizarPanelEntrada(Controlador.getEntradaLineal());
+                actualizarPanelEntrada(ControladorFunciones.getEntradaLineal());
 
                 break;
 
             case "Cuadrática":
 
-                actualizarPanelEntrada(Controlador.getEntradaCuadratica());
+                actualizarPanelEntrada(ControladorFunciones.getEntradaCuadratica());
                 
                 break;
 
