@@ -1,6 +1,6 @@
 package logica;
 
-import logica.funciones.Funcion;
+import gui.Funciones.IFuncion;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -81,7 +81,7 @@ public class Plano {
 
     }
 
-    public void dibujarFuncion(Funcion f) {
+    public void dibujarFuncion(IFuncion f) {
 
         int ajusteAlPunto = tamanoPunto / 2;
         int ajusteGraficoX = ancho / 2;
@@ -116,9 +116,6 @@ public class Plano {
 
     public void setPaso(double paso) {
         this.paso = paso;
-    }
-
-    public void setFuncion(Funcion f) {
     }
 
 }

@@ -1,4 +1,4 @@
-package logica.funciones;
+package gui.Funciones;
 
 import gui.Funciones.*;
 
@@ -60,11 +60,11 @@ public class ControladorFunciones {
     }
 
     public static JPanel getEntradaLineal() {
-        return new FLinealIN().obtenerPanel();
+        return new FLineal().obtenerPanel();
     }
 
     public static JPanel getEntradaCuadratica() {
-        return new FCuadraticaIN().obtenerPanel();
+        return new FCuadratica().obtenerPanel();
     }
 
 }

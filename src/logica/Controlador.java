@@ -32,11 +32,11 @@ public class Controlador {
     }
     
     public static JPanel getEntradaLineal(){
-        return new FLinealIN().obtenerPanel();
+        return new FLineal().obtenerPanel();
     }
     
     public static JPanel getEntradaCuadratica(){
-        return new FCuadraticaIN().obtenerPanel();
+        return new FCuadratica().obtenerPanel();
     }
     
 }

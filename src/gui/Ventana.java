@@ -1,5 +1,7 @@
 package gui;
 
+import gui.Funciones.*;
+
 import java.util.Queue;
 
 import java.awt.event.WindowEvent;
@@ -11,12 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import logica.Plano;
-import logica.funciones.*;
 
 public class Ventana extends javax.swing.JFrame {
 
     private Plano planoCartesiano;
-    private Funcion f;
+    private IFuncion f;
 
     private boolean funcionPintada = false;
 
@@ -58,7 +59,7 @@ public class Ventana extends javax.swing.JFrame {
 
     }
 
-    private void setFuncion(Funcion f) {
+    private void setFuncion(IFuncion f) {
         this.f = f;
     }
 

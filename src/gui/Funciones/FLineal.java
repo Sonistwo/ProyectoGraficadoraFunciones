@@ -4,17 +4,41 @@ import javax.swing.JPanel;
 
 import gui.ControladorGui;
 
-public class FLinealIN extends javax.swing.JPanel {
-    
-    public FLinealIN() {
+import java.util.Queue;
+
+public class FLineal extends javax.swing.JPanel implements IFuncion {
+
+    //f(x) = mx + b ; m != 0
+    private double m, b;
+
+    @Override
+    public double obtenerPuntoImagen(double x) {
+        double y = (m * x) + b;
+        return y;
+    }
+
+    public void setParams(Queue<Double> parametros) {
+
+        double pendiente = parametros.poll();
+        double complemento = parametros.poll();
+
+        if (pendiente == 0) {
+            this.m = 1;
+        } else {
+            this.m = pendiente;
+        }
+        this.b = complemento;
+    }
+
+    public FLineal() {
         initComponents();
         this.setSize(ControladorGui.DIMENSION_PANEL_ENTRADA);
     }
-    
+
     public JPanel obtenerPanel() {
         return this;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -73,11 +97,8 @@ public class FLinealIN extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTF1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF1KeyTyped
-        
         jTF1.setBorder(ControladorGui.BORDE_TEXTFIELDS);
-
     }//GEN-LAST:event_jTF1KeyTyped
-
     private void jTF2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF2KeyTyped
         jTF2.setBorder(ControladorGui.BORDE_TEXTFIELDS);
     }//GEN-LAST:event_jTF2KeyTyped

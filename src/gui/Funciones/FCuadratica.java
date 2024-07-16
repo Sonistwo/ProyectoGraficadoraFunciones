@@ -3,10 +3,32 @@ package gui.Funciones;
 import javax.swing.JPanel;
 
 import gui.ControladorGui;
+import java.util.Queue;
 
-public class FCuadraticaIN extends javax.swing.JPanel {
+public class FCuadratica extends javax.swing.JPanel implements IFuncion {
 
-    public FCuadraticaIN() {
+    //f(x) = ax^2 + bx + c ; a != 0
+    double a, b, c;
+
+    @Override
+    public double obtenerPuntoImagen(double x) {
+        double y = (a * x * x) + (b * x) + c;
+        return y;
+    }
+
+    public void setParams(Queue<Double> parametros) {
+        
+        double aCoef = parametros.poll();
+        double bCoef = parametros.poll();
+        double cCons = parametros.poll();
+        
+        this.a = aCoef == 0 ? 1 : aCoef;
+        this.b = bCoef;
+        this.c = cCons;
+
+    }
+    
+    public FCuadratica() {
         initComponents();
         this.setSize(ControladorGui.DIMENSION_PANEL_ENTRADA);
     }
@@ -95,11 +117,9 @@ public class FCuadraticaIN extends javax.swing.JPanel {
     private void jTF1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF1KeyTyped
         jTF1.setBorder(ControladorGui.BORDE_TEXTFIELDS);
     }//GEN-LAST:event_jTF1KeyTyped
-
     private void jTF3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF3KeyTyped
         jTF3.setBorder(ControladorGui.BORDE_TEXTFIELDS);
     }//GEN-LAST:event_jTF3KeyTyped
-
     private void jTF2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF2KeyTyped
         jTF2.setBorder(ControladorGui.BORDE_TEXTFIELDS);
     }//GEN-LAST:event_jTF2KeyTyped
