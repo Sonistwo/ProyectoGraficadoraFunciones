@@ -1,5 +1,7 @@
 package logica.funciones;
 
+import java.util.Queue;
+
 public class FCuadratica extends Funcion {
 
     //f(x) = ax^2 + bx + c ; a != 0
@@ -15,16 +17,21 @@ public class FCuadratica extends Funcion {
         return y;
     }
 
-    public void setParams(double a, double b, double c) {
-        if (a == 0) {
+    public void setParams(Queue<Double> parametros) {
+        
+        double aCoef = parametros.poll();
+        double bCoef = parametros.poll();
+        double cCons = parametros.poll();
+        
+        if (aCoef == 0) {
             this.a = 1;
         } else {
-            this.a = a;
+            this.a = aCoef;
         }
 
-        this.b = b;
+        this.b = bCoef;
 
-        this.c = c;
+        this.c = cCons;
 
     }
 
