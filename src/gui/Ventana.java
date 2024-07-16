@@ -1,20 +1,16 @@
 package gui;
 
 import java.util.Queue;
-import java.util.LinkedList;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowAdapter;
-import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 import javax.swing.JPanel;
 
 import logica.Plano;
-import logica.Controlador;
 import logica.funciones.*;
 
 public class Ventana extends javax.swing.JFrame {
@@ -49,7 +45,7 @@ public class Ventana extends javax.swing.JFrame {
                 cambioFuncion();
             }
         });
-        
+
         this.f = new FLineal();
         setEntradas();
 
@@ -66,34 +62,33 @@ public class Ventana extends javax.swing.JFrame {
         this.f = f;
     }
 
-    private Queue<Double> obtenerEntradas() {
-
-        Queue<Double> colaParametros = new LinkedList<>();
-
-        Component panel = panelEntrada.getComponent(0);
-
-        if (panel instanceof JPanel p) {
-
-            Component[] componentes = p.getComponents();
-
-            for (Component c : componentes) {
-                if (c instanceof JTextField campo) {
-                    if (!campo.getText().isEmpty()) {
-                        Double parametro = Double.valueOf(campo.getText());
-                        colaParametros.add(parametro);
-                    } else {
-                        colaParametros.add(Double.valueOf(0));
-                    }
-
-                }
-            }
-
-        }
-
-        return colaParametros;
-
-    }
-
+//    private Queue<Double> obtenerEntradas() {
+//
+//        Queue<Double> colaParametros = new LinkedList<>();
+//
+//        Component panel = panelEntrada.getComponent(0);
+//
+//        if (panel instanceof JPanel p) {
+//
+//            Component[] componentes = p.getComponents();
+//
+//            for (Component c : componentes) {
+//                if (c instanceof JTextField campo) {
+//                    if (!campo.getText().isEmpty()) {
+//                        Double parametro = Double.valueOf(campo.getText());
+//                        colaParametros.add(parametro);
+//                    } else {
+//                        colaParametros.add(Double.valueOf(0));
+//                    }
+//
+//                }
+//            }
+//
+//        }
+//
+//        return colaParametros;
+//
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -140,11 +135,6 @@ public class Ventana extends javax.swing.JFrame {
         cboxFunciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cboxFunciones.setFocusable(false);
         cboxFunciones.setMaximumSize(new java.awt.Dimension(131, 31));
-        cboxFunciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboxFuncionesActionPerformed(evt);
-            }
-        });
 
         panelEntrada.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         panelEntrada.setMaximumSize(new java.awt.Dimension(300, 116));
@@ -325,59 +315,52 @@ public class Ventana extends javax.swing.JFrame {
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
 
-        planoCartesiano.repintarPlano();
-            
-        Queue<Double> parametros = obtenerEntradas();
+        Queue<Double> parametros = ControladorFunciones.obtenerEntradas();
+
+        if (parametros == null) {
+
+            PopUp.mensajeError("Hay un error en la entrada de datos.", "Error");
+            return;
+
+        }
 
         String funcionSeleccionada = getFuncionSeleccionada();
 
         switch (funcionSeleccionada) {
 
-            case "Lineal":
+            case "Lineal" -> {
                 FLineal lineal = (FLineal) f;
-                lineal.setParams(parametros.poll(), parametros.poll());
-                break;
+                lineal.setParams(parametros);
+            }
 
-            case "Cuadrática":
+            case "Cuadrática" -> {
                 FCuadratica cuadratica = (FCuadratica) f;
-                cuadratica.setParams(parametros.poll(), parametros.poll(), parametros.poll());
-                break;
-                
-            default:
+                cuadratica.setParams(parametros);
+            }
+
+            default -> {
                 return;
+            }
 
         }
 
+        planoCartesiano.repintarPlano();
         planoCartesiano.dibujarFuncion(f);
         this.funcionPintada = true;
-        
-    }//GEN-LAST:event_btnGraficarActionPerformed
 
-    private void cboxFuncionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboxFuncionesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cboxFuncionesActionPerformed
+    }//GEN-LAST:event_btnGraficarActionPerformed
 
     private void setEntradas() {
 
         String funcionSeleccionada = getFuncionSeleccionada();
 
         switch (funcionSeleccionada) {
-
-            case "Lineal":
-
+            case "Lineal" ->
                 actualizarPanelEntrada(ControladorFunciones.getEntradaLineal());
-
-                break;
-
-            case "Cuadrática":
-
-                actualizarPanelEntrada(ControladorFunciones.getEntradaCuadratica());
                 
-                break;
-
+            case "Cuadrática" ->
+                actualizarPanelEntrada(ControladorFunciones.getEntradaCuadratica());
         }
-        
-        
 
     }
 
@@ -396,39 +379,36 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JButton btnZoomOut;
     private javax.swing.JComboBox<String> cboxFunciones;
     private javax.swing.JPanel panelAbajo;
-    private javax.swing.JPanel panelEntrada;
+    public static javax.swing.JPanel panelEntrada;
     private javax.swing.JPanel panelFuncion;
     private javax.swing.JPanel panelLateral;
     private javax.swing.JPanel panelPrincipal;
     private javax.swing.JSeparator separador;
     // End of variables declaration//GEN-END:variables
 
-    
     private String getFuncionSeleccionada() {
         return cboxFunciones.getSelectedItem().toString();
     }
 
     private void cambioFuncion() {
-        
+
         String funcionSeleccionada = getFuncionSeleccionada();
 
         switch (funcionSeleccionada) {
 
-            case "Lineal":
+            case "Lineal" ->
                 this.setFuncion(new FLineal());
-                break;
 
-            case "Cuadrática":
+            case "Cuadrática" ->
                 this.setFuncion(new FCuadratica());
-                break;
         }
-        
+
     }
 
     private void actualizarPanelEntrada(JPanel panelNuevo) {
-        this.panelEntrada.removeAll();
-        this.panelEntrada.add(panelNuevo);
-        this.panelEntrada.repaint();
-        this.panelEntrada.revalidate();
+        panelEntrada.removeAll();
+        panelEntrada.add(panelNuevo);
+        panelEntrada.repaint();
+        panelEntrada.revalidate();
     }
 }

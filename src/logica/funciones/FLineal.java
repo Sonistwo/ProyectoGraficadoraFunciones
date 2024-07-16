@@ -17,14 +17,18 @@ public class FLineal extends Funcion {
         return y;
     }
 
-    public void setParams(double m, double b){
-        if(m == 0){
+    public void setParams(Queue<Double> parametros){
+        
+        double pendiente = parametros.poll();
+        double complemento = parametros.poll();
+        
+        if(pendiente == 0){
             this.m = 1;
         } else {
-            this.m = m;
+            this.m = pendiente;
         }
         
-        this.b = b;
+        this.b = complemento;
     }
 
 }
