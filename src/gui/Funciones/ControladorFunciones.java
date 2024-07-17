@@ -68,5 +68,9 @@ public class ControladorFunciones {
     public static JPanel getEntradaCubica(){
         return new FCubica().obtenerPanel();
     }
+    
+    public static JPanel getEntradaPolinomial(){
+        return new FPolinomial().obtenerPanel();
+    }
 
 }

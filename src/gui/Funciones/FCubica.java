@@ -49,11 +49,6 @@ public class FCubica extends javax.swing.JPanel implements IFuncion {
 
         jTF1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTF1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTF1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTF1ActionPerformed(evt);
-            }
-        });
         jTF1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTF1KeyTyped(evt);
@@ -126,10 +121,6 @@ public class FCubica extends javax.swing.JPanel implements IFuncion {
     private void jTF4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTF4KeyTyped
         jTF4.setBorder(ControladorGui.BORDE_TEXTFIELDS);
     }//GEN-LAST:event_jTF4KeyTyped
-
-    private void jTF1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTF1ActionPerformed
 
     @Override
     public double obtenerPuntoImagen(double x) {

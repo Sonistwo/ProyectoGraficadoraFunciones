@@ -31,12 +31,4 @@ public class Controlador {
         
     }
     
-    public static JPanel getEntradaLineal(){
-        return new FLineal().obtenerPanel();
-    }
-    
-    public static JPanel getEntradaCuadratica(){
-        return new FCuadratica().obtenerPanel();
-    }
-    
 }

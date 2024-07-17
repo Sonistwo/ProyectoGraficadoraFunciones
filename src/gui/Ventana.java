@@ -104,7 +104,7 @@ public class Ventana extends javax.swing.JFrame {
         panelLateral.setMinimumSize(new java.awt.Dimension(312, 510));
 
         cboxFunciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cboxFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lineal", "Cuadrática", "Cúbica" }));
+        cboxFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lineal", "Cuadrática", "Cúbica", "Polinomial" }));
         cboxFunciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cboxFunciones.setFocusable(false);
         cboxFunciones.setMaximumSize(new java.awt.Dimension(131, 31));
@@ -297,26 +297,7 @@ public class Ventana extends javax.swing.JFrame {
 
         }
 
-        String funcionSeleccionada = getFuncionSeleccionada();
-
-        switch (funcionSeleccionada) {
-
-            case "Lineal" -> {
-                FLineal lineal = (FLineal) f;
-                lineal.setParams(parametros);
-            }
-
-            case "Cuadrática" -> {
-                FCuadratica cuadratica = (FCuadratica) f;
-                cuadratica.setParams(parametros);
-            }
-            
-            case "Cúbica" -> {
-                FCubica cubica = (FCubica) f;
-                cubica.setParams(parametros);
-            }
-
-        }
+        cargarParametros(parametros);
 
         planoCartesiano.repintarPlano();
         planoCartesiano.dibujarFuncion(f);
@@ -370,9 +351,41 @@ public class Ventana extends javax.swing.JFrame {
                 actualizarPanelEntrada(ControladorFunciones.getEntradaCubica());
                 setFuncion(new FCubica());
             }
+            
+            case "Polinomial" -> {
+                actualizarPanelEntrada(ControladorFunciones.getEntradaPolinomial());
+                setFuncion(new FPolinomial());
+            }
 
         }
 
+    }
+    
+    private void cargarParametros(Queue<Double> parametros){
+        String funcionSeleccionada = getFuncionSeleccionada();
+
+        switch (funcionSeleccionada) {
+
+            case "Lineal" -> {
+                FLineal lineal = (FLineal) f;
+                lineal.setParams(parametros);
+            }
+
+            case "Cuadrática" -> {
+                FCuadratica cuadratica = (FCuadratica) f;
+                cuadratica.setParams(parametros);
+            }
+            
+            case "Cúbica" -> {
+                FCubica cubica = (FCubica) f;
+                cubica.setParams(parametros);
+            }
+            
+            case "Polinomial" -> {
+                //Esta operación se hace aparte.                
+            }
+
+        }
     }
 
     private void actualizarPanelEntrada(JPanel panelNuevo) {
