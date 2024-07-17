@@ -42,13 +42,12 @@ public class Ventana extends javax.swing.JFrame {
         cboxFunciones.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent itemEvent) {
-                setEntradas();
                 cambioFuncion();
             }
         });
 
         this.f = new FLineal();
-        setEntradas();
+        cambioFuncion();
 
     }
 
@@ -63,33 +62,6 @@ public class Ventana extends javax.swing.JFrame {
         this.f = f;
     }
 
-//    private Queue<Double> obtenerEntradas() {
-//
-//        Queue<Double> colaParametros = new LinkedList<>();
-//
-//        Component panel = panelEntrada.getComponent(0);
-//
-//        if (panel instanceof JPanel p) {
-//
-//            Component[] componentes = p.getComponents();
-//
-//            for (Component c : componentes) {
-//                if (c instanceof JTextField campo) {
-//                    if (!campo.getText().isEmpty()) {
-//                        Double parametro = Double.valueOf(campo.getText());
-//                        colaParametros.add(parametro);
-//                    } else {
-//                        colaParametros.add(Double.valueOf(0));
-//                    }
-//
-//                }
-//            }
-//
-//        }
-//
-//        return colaParametros;
-//
-//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -132,7 +104,7 @@ public class Ventana extends javax.swing.JFrame {
         panelLateral.setMinimumSize(new java.awt.Dimension(312, 510));
 
         cboxFunciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        cboxFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lineal", "Cuadrática" }));
+        cboxFunciones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lineal", "Cuadrática", "Cúbica" }));
         cboxFunciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cboxFunciones.setFocusable(false);
         cboxFunciones.setMaximumSize(new java.awt.Dimension(131, 31));
@@ -338,9 +310,10 @@ public class Ventana extends javax.swing.JFrame {
                 FCuadratica cuadratica = (FCuadratica) f;
                 cuadratica.setParams(parametros);
             }
-
-            default -> {
-                return;
+            
+            case "Cúbica" -> {
+                FCubica cubica = (FCubica) f;
+                cubica.setParams(parametros);
             }
 
         }
@@ -350,20 +323,6 @@ public class Ventana extends javax.swing.JFrame {
         this.funcionPintada = true;
 
     }//GEN-LAST:event_btnGraficarActionPerformed
-
-    private void setEntradas() {
-
-        String funcionSeleccionada = getFuncionSeleccionada();
-
-        switch (funcionSeleccionada) {
-            case "Lineal" ->
-                actualizarPanelEntrada(ControladorFunciones.getEntradaLineal());
-                
-            case "Cuadrática" ->
-                actualizarPanelEntrada(ControladorFunciones.getEntradaCuadratica());
-        }
-
-    }
 
 //    public static void main(String args[]) {
 //        java.awt.EventQueue.invokeLater(new Runnable() {
@@ -397,11 +356,21 @@ public class Ventana extends javax.swing.JFrame {
 
         switch (funcionSeleccionada) {
 
-            case "Lineal" ->
-                this.setFuncion(new FLineal());
+            case "Lineal" -> {
+                actualizarPanelEntrada(ControladorFunciones.getEntradaLineal());
+                setFuncion(new FLineal());
+            }
 
-            case "Cuadrática" ->
-                this.setFuncion(new FCuadratica());
+            case "Cuadrática" -> {
+                actualizarPanelEntrada(ControladorFunciones.getEntradaCuadratica());
+                setFuncion(new FCuadratica());
+            }
+
+            case "Cúbica" -> {
+                actualizarPanelEntrada(ControladorFunciones.getEntradaCubica());
+                setFuncion(new FCubica());
+            }
+
         }
 
     }

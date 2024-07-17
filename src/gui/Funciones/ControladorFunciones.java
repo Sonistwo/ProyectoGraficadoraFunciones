@@ -1,7 +1,5 @@
 package gui.Funciones;
 
-import gui.Funciones.*;
-
 import gui.Ventana;
 
 import java.awt.Color;
@@ -65,6 +63,10 @@ public class ControladorFunciones {
 
     public static JPanel getEntradaCuadratica() {
         return new FCuadratica().obtenerPanel();
+    }
+    
+    public static JPanel getEntradaCubica(){
+        return new FCubica().obtenerPanel();
     }
 
 }
