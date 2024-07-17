@@ -78,6 +78,7 @@ public class Ventana extends javax.swing.JFrame {
         separador = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Graficadora de funciones");
         setMaximumSize(new java.awt.Dimension(842, 570));
         setMinimumSize(new java.awt.Dimension(842, 570));
 

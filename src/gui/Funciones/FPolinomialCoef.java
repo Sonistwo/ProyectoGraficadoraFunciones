@@ -16,12 +16,20 @@ public class FPolinomialCoef extends javax.swing.JFrame {
 
     private int potenciaActual = 0;
     private final int columnaCoef = 1;
+    
+    private static boolean primeraVez = true;
 
     public static Queue<Double> coeficientes;
 
     public FPolinomialCoef() {
         initComponents();
         iniciarTabla();
+        this.setLocationRelativeTo(null);
+        
+        if(primeraVez){
+            PopUp.mensajeInfo("Procure presionar ENTER para guardar el valor", "Info");
+            primeraVez = false;
+        }
         
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -29,7 +37,7 @@ public class FPolinomialCoef extends javax.swing.JFrame {
                 FPolinomial.coeficientes = getParametros();
             }
         });
-        
+
     }
 
     private void iniciarTabla() {
@@ -37,6 +45,7 @@ public class FPolinomialCoef extends javax.swing.JFrame {
         Object[] datoInicial = {potenciaActual, null};
         mt.addRow(datoInicial);
         potenciaActual++;
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -220,7 +229,7 @@ public class FPolinomialCoef extends javax.swing.JFrame {
 
         DefaultTableModel mt = (DefaultTableModel) tablaCoef.getModel();
 
-        mt.removeRow(potenciaActual);
+        mt.removeRow(potenciaActual - 1);
 
         potenciaActual--;
 
@@ -240,17 +249,24 @@ public class FPolinomialCoef extends javax.swing.JFrame {
     }
 
     public Queue<Double> getParametros() {
-        
+
         Queue<Double> parametros = new LinkedList<>();
         DefaultTableModel mt = (DefaultTableModel) tablaCoef.getModel();
 
         for (int i = 0; i < potenciaActual; i++) {
-            Double parametro = Double.valueOf(mt.getValueAt(i, columnaCoef).toString());
+
+            Double parametro;
+
+            try {
+                parametro = Double.valueOf(mt.getValueAt(i, columnaCoef).toString());
+            } catch (NumberFormatException | NullPointerException e) {
+                parametro = Double.valueOf("1");
+            }
 
             if (i == potenciaActual && mt.getValueAt(potenciaActual - 1, columnaCoef).equals(0)) {
                 parametros.add(Double.valueOf("1"));
             }
-            
+
             parametros.add(parametro);
         }
 
