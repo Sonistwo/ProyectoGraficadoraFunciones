@@ -242,12 +242,6 @@ public class FPolinomialCoef extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new FPolinomialCoef().setVisible(true);
-        });
-    }
-
     public Queue<Double> getParametros() {
 
         Queue<Double> parametros = new LinkedList<>();
