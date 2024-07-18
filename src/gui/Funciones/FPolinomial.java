@@ -33,7 +33,7 @@ public class FPolinomial extends javax.swing.JPanel implements IFuncion {
         setMinimumSize(new java.awt.Dimension(300, 116));
 
         btnCoef.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        btnCoef.setText("Configurar coeficientes");
+        btnCoef.setText("Coeficientes");
         btnCoef.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCoefActionPerformed(evt);
