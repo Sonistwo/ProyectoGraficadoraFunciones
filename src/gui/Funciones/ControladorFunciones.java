@@ -15,7 +15,10 @@ import javax.swing.JTextField;
 import logica.Controlador;
 
 public class ControladorFunciones {
-
+    
+    public static final String E = "2.7182818";
+    public static final String PI = "3.14159265";
+            
     public static Queue<Double> obtenerEntradas() {
 
         boolean valido = true;

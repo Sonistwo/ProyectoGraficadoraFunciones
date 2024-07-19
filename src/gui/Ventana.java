@@ -12,6 +12,7 @@ import java.awt.event.ItemListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import logica.Controlador;
 import logica.Plano;
 
 public class Ventana extends javax.swing.JFrame {
@@ -71,6 +72,7 @@ public class Ventana extends javax.swing.JFrame {
         panelLateral = new javax.swing.JPanel();
         cboxFunciones = new javax.swing.JComboBox<>();
         panelEntrada = new javax.swing.JPanel();
+        btnInfoFuncs = new javax.swing.JLabel();
         panelAbajo = new javax.swing.JPanel();
         btnZoomIn = new javax.swing.JButton();
         btnZoomOut = new javax.swing.JButton();
@@ -115,27 +117,42 @@ public class Ventana extends javax.swing.JFrame {
         panelEntrada.setMinimumSize(new java.awt.Dimension(300, 116));
         panelEntrada.setLayout(new java.awt.CardLayout());
 
+        btnInfoFuncs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/pngInfo.png"))); // NOI18N
+        btnInfoFuncs.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnInfoFuncs.setMaximumSize(new java.awt.Dimension(35, 35));
+        btnInfoFuncs.setMinimumSize(new java.awt.Dimension(35, 35));
+        btnInfoFuncs.setPreferredSize(new java.awt.Dimension(35, 35));
+        btnInfoFuncs.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnInfoFuncsMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLateralLayout = new javax.swing.GroupLayout(panelLateral);
         panelLateral.setLayout(panelLateralLayout);
         panelLateralLayout.setHorizontalGroup(
             panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLateralLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(cboxFunciones, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
-            .addGroup(panelLateralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(panelLateralLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(cboxFunciones, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(btnInfoFuncs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panelLateralLayout.setVerticalGroup(
             panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLateralLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(cboxFunciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLateralLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(cboxFunciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnInfoFuncs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(panelEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(325, Short.MAX_VALUE))
         );
 
         panelAbajo.setMaximumSize(new java.awt.Dimension(398, 95));
@@ -306,6 +323,12 @@ public class Ventana extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnGraficarActionPerformed
 
+    private void btnInfoFuncsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInfoFuncsMouseClicked
+        
+        PopUp.mensajeInfo(Controlador.mensajeInfo(), "Info");
+        
+    }//GEN-LAST:event_btnInfoFuncsMouseClicked
+
 //    public static void main(String args[]) {
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
@@ -317,6 +340,7 @@ public class Ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGraficar;
+    private javax.swing.JLabel btnInfoFuncs;
     private javax.swing.JButton btnZoomIn;
     private javax.swing.JButton btnZoomOut;
     private javax.swing.JComboBox<String> cboxFunciones;
