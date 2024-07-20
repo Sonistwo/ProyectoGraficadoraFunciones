@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import gui.ControladorGui;
 import java.util.Queue;
 
-public class FCuadratica extends javax.swing.JPanel implements IFuncion {
+public class FCuadratica extends javax.swing.JPanel implements IFuncion, IPanelado {
 
     //f(x) = ax^2 + bx + c ; a != 0
     double a, b, c;
@@ -33,6 +33,7 @@ public class FCuadratica extends javax.swing.JPanel implements IFuncion {
         this.setSize(ControladorGui.DIMENSION_PANEL_ENTRADA);
     }
 
+    @Override
     public JPanel obtenerPanel(){
         return this;
     }

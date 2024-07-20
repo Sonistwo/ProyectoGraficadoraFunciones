@@ -6,7 +6,7 @@ import java.util.Queue;
 
 import javax.swing.JPanel;
 
-public class FCubica extends javax.swing.JPanel implements IFuncion {
+public class FCubica extends javax.swing.JPanel implements IFuncion, IPanelado {
 
     // f(x) = ax³+ bx² + cx + d ; a != 0
     private double a, b, c, d;
@@ -142,6 +142,7 @@ public class FCubica extends javax.swing.JPanel implements IFuncion {
         
     }
     
+    @Override
     public JPanel obtenerPanel() {
         return this;
     }

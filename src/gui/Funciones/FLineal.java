@@ -6,7 +6,7 @@ import gui.ControladorGui;
 
 import java.util.Queue;
 
-public class FLineal extends javax.swing.JPanel implements IFuncion {
+public class FLineal extends javax.swing.JPanel implements IFuncion, IPanelado {
 
     //f(x) = mx + b ; m != 0
     private double m, b;
@@ -35,6 +35,7 @@ public class FLineal extends javax.swing.JPanel implements IFuncion {
         this.setSize(ControladorGui.DIMENSION_PANEL_ENTRADA);
     }
 
+    @Override
     public JPanel obtenerPanel() {
         return this;
     }

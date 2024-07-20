@@ -7,7 +7,7 @@ import java.util.Queue;
 
 import javax.swing.JPanel;
 
-public class FPolinomial extends javax.swing.JPanel implements IFuncion {
+public class FPolinomial extends javax.swing.JPanel implements IFuncion, IPanelado {
 
     //f(x) = a1x^n + a2x^(n-1) + a3x^(n-2) + ... + an-2x² + an-1x + an ; a1 != 0
     public static Queue<Double> coeficientes;
@@ -18,7 +18,8 @@ public class FPolinomial extends javax.swing.JPanel implements IFuncion {
         initComponents();
         this.setSize(ControladorGui.DIMENSION_PANEL_ENTRADA);
     }
-
+    
+    @Override
     public JPanel obtenerPanel() {
         return this;
     }

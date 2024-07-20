@@ -18,7 +18,7 @@ import logica.Plano;
 public class Ventana extends javax.swing.JFrame {
 
     private Plano planoCartesiano;
-    private IFuncion f;
+    private static IFuncion f;
 
     private boolean funcionPintada = false;
 
@@ -47,7 +47,7 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
-        this.f = new FLineal();
+        f = new FLineal();
         cambioFuncion();
 
     }
@@ -59,8 +59,12 @@ public class Ventana extends javax.swing.JFrame {
 
     }
 
-    private void setFuncion(IFuncion f) {
-        this.f = f;
+    public static void setFuncion(IFuncion funcion) {
+        f = funcion;
+    }
+    
+    public static IFuncion getFuncion() {
+        return f;
     }
 
     @SuppressWarnings("unchecked")
@@ -119,9 +123,6 @@ public class Ventana extends javax.swing.JFrame {
 
         btnInfoFuncs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/pngInfo.png"))); // NOI18N
         btnInfoFuncs.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnInfoFuncs.setMaximumSize(new java.awt.Dimension(35, 35));
-        btnInfoFuncs.setMinimumSize(new java.awt.Dimension(35, 35));
-        btnInfoFuncs.setPreferredSize(new java.awt.Dimension(35, 35));
         btnInfoFuncs.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInfoFuncsMouseClicked(evt);
@@ -140,7 +141,7 @@ public class Ventana extends javax.swing.JFrame {
                 .addGap(56, 56, 56)
                 .addComponent(cboxFunciones, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addComponent(btnInfoFuncs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnInfoFuncs))
         );
         panelLateralLayout.setVerticalGroup(
             panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +150,7 @@ public class Ventana extends javax.swing.JFrame {
                     .addGroup(panelLateralLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(cboxFunciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnInfoFuncs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnInfoFuncs))
                 .addGap(18, 18, 18)
                 .addComponent(panelEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(325, Short.MAX_VALUE))
@@ -324,9 +325,9 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGraficarActionPerformed
 
     private void btnInfoFuncsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInfoFuncsMouseClicked
-        
+
         PopUp.mensajeInfo(Controlador.mensajeInfo(), "Info");
-        
+
     }//GEN-LAST:event_btnInfoFuncsMouseClicked
 
 //    public static void main(String args[]) {
@@ -359,34 +360,13 @@ public class Ventana extends javax.swing.JFrame {
     private void cambioFuncion() {
 
         String funcionSeleccionada = getFuncionSeleccionada();
-
-        switch (funcionSeleccionada) {
-
-            case "Lineal" -> {
-                actualizarPanelEntrada(ControladorFunciones.getEntradaLineal());
-                setFuncion(new FLineal());
-            }
-
-            case "Cuadrática" -> {
-                actualizarPanelEntrada(ControladorFunciones.getEntradaCuadratica());
-                setFuncion(new FCuadratica());
-            }
-
-            case "Cúbica" -> {
-                actualizarPanelEntrada(ControladorFunciones.getEntradaCubica());
-                setFuncion(new FCubica());
-            }
-            
-            case "Polinomial" -> {
-                actualizarPanelEntrada(ControladorFunciones.getEntradaPolinomial());
-                setFuncion(new FPolinomial());
-            }
-
-        }
-
+        
+        actualizarPanelEntrada(ControladorFunciones.getEntradaPanel(funcionSeleccionada));
+        ControladorFunciones.setFuncion(funcionSeleccionada);
+        
     }
-    
-    private void cargarParametros(Queue<Double> parametros){
+
+    private void cargarParametros(Queue<Double> parametros) {
         String funcionSeleccionada = getFuncionSeleccionada();
 
         switch (funcionSeleccionada) {
@@ -400,12 +380,12 @@ public class Ventana extends javax.swing.JFrame {
                 FCuadratica cuadratica = (FCuadratica) f;
                 cuadratica.setParams(parametros);
             }
-            
+
             case "Cúbica" -> {
                 FCubica cubica = (FCubica) f;
                 cubica.setParams(parametros);
             }
-            
+
             case "Polinomial" -> {
                 //Esta operación se hace aparte.                
             }
@@ -419,4 +399,5 @@ public class Ventana extends javax.swing.JFrame {
         panelEntrada.repaint();
         panelEntrada.revalidate();
     }
+    
 }

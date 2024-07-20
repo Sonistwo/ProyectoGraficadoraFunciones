@@ -15,10 +15,10 @@ import javax.swing.JTextField;
 import logica.Controlador;
 
 public class ControladorFunciones {
-    
+
     public static final String E = "2.7182818";
     public static final String PI = "3.14159265";
-            
+
     public static Queue<Double> obtenerEntradas() {
 
         boolean valido = true;
@@ -35,10 +35,13 @@ public class ControladorFunciones {
                 String valor = campo.getText();
                 valor = valor.replace(",", ".");
 
-                if (valor.isEmpty()) {
-                    valor = "0";
-                } else if (valor.equals("-")) {
-                    valor += "1";
+                switch(valor.toUpperCase()){
+                    
+                    case "" -> valor += "0";
+                    case "-" -> valor += "1";
+                    case "E" -> valor = ControladorFunciones.E;
+                    case "PI" -> valor = ControladorFunciones.PI;
+                    
                 }
 
                 if (!Controlador.verificarReal(valor)) {
@@ -60,20 +63,50 @@ public class ControladorFunciones {
 
     }
 
-    public static JPanel getEntradaLineal() {
-        return new FLineal().obtenerPanel();
+    public static JPanel getEntradaPanel(String funcion) {
+
+        JPanel panel = null;
+
+        switch (funcion) {
+
+            case "Lineal" ->
+                panel = new FLineal().obtenerPanel();
+            case "Cuadrática" ->
+                panel = new FCuadratica().obtenerPanel();
+            case "Cúbica" ->
+                panel = new FCubica().obtenerPanel();
+            case "Polinomial" ->
+                panel = new FPolinomial().obtenerPanel();
+
+        }
+
+        return panel;
+
     }
 
-    public static JPanel getEntradaCuadratica() {
-        return new FCuadratica().obtenerPanel();
+    public static void setFuncion(String funcion) {
+
+        switch (funcion) {
+
+            case "Lineal" ->
+                Ventana.setFuncion(new FLineal());
+            case "Cuadrática" ->
+                Ventana.setFuncion(new FCuadratica());
+            case "Cúbica" ->
+                Ventana.setFuncion(new FCubica());
+            case "Polinomial" ->
+                Ventana.setFuncion(new FPolinomial());
+
+        }
+
     }
-    
-    public static JPanel getEntradaCubica(){
-        return new FCubica().obtenerPanel();
-    }
-    
-    public static JPanel getEntradaPolinomial(){
-        return new FPolinomial().obtenerPanel();
+
+    public static void cambiarParametros(Queue<Double> parametros, String funcion) {
+
+        IFuncion f = Ventana.getFuncion();
+
+        f.setParams(parametros);
+
     }
 
 }
